@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Sublima', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+h1 {
+  color: black;
+}
+
+#gameScreen {
+  border: 2px solid black;
+  border-radius: 15px;
+}
