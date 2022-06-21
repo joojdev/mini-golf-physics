@@ -37,8 +37,8 @@ new Engine(60, () => {
 
   if (mouseClicked && ball.velocity == 0) {
     mouseClicked = false
-    const angle = Math.atan2(mouseY - ball.y - ball.totalSize / 2, mouseX - ball.x - ball.totalSize / 2) * (180 / Math.PI)
-    const velocity = Math.sqrt((mouseX - ball.x + ball.totalSize / 2) ** 2 + (mouseY - ball.y + ball.totalSize / 2) ** 2)
+    const angle = Math.atan2(mouseY - (ball.y + ball.totalSize / 2), mouseX - (ball.x + ball.totalSize / 2)) * (180 / Math.PI)
+    const velocity = Math.sqrt((mouseX - (ball.x + ball.totalSize / 2)) ** 2 + (mouseY - (ball.y + ball.totalSize / 2)) ** 2)
     ball.angle = angle
     ball.velocity = velocity * 0.15
   }
