@@ -15,7 +15,7 @@ function Hole(initialX, initialY, radius) {
     hole.x = random(0 + hole.radius, SCREEN_WIDTH - hole.radius)
     hole.y = random(0 + hole.radius, SCREEN_HEIGHT - hole.radius)
 
-    if (this.colliding(golfball)) this.randomLocation()
+    if (this.colliding(golfball)) this.randomLocation(golfball)
   }
 }
 
