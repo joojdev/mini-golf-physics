@@ -3,12 +3,12 @@ const SCREEN_HEIGHT = 300
 
 const gameScreen = document.querySelector('#gameScreen')
 const canvas = new Canvas(gameScreen, SCREEN_WIDTH, SCREEN_HEIGHT)
-const ball = new Golfball(10, 10, 9, 3, 0, 0, 0.3, '#ffffff')
+const ball = new Golfball(20, 20, 9, 3, 0, 0, 0.3, '#ffffff')
 
 let mouseOn = false
 let mouseClicked = false
-let mouseX = 10 + ball.totalSize / 2
-let mouseY = 10 + ball.totalSize / 2
+let mouseX = ball.x
+let mouseY = ball.y
 
 gameScreen.onmouseover = () => {
   mouseOn = true
@@ -31,14 +31,14 @@ gameScreen.onclick = () => {
 new Engine(60, () => {
   canvas.checkerboard(7, 7, '#a2e055', '#93d640')
   if (mouseOn && ball.velocity == 0) {
-    canvas.arrow(ball.x + ball.totalSize / 2, ball.y + ball.totalSize / 2, mouseX, mouseY, 2, '#000')
+    canvas.arrow(ball.x, ball.y, mouseX, mouseY, 2, '#000000')
   }
   canvas.golfBall(ball)
 
   if (mouseClicked && ball.velocity == 0) {
     mouseClicked = false
-    const angle = Math.atan2(mouseY - (ball.y + ball.totalSize / 2), mouseX - (ball.x + ball.totalSize / 2)) * (180 / Math.PI)
-    const velocity = Math.sqrt((mouseX - (ball.x + ball.totalSize / 2)) ** 2 + (mouseY - (ball.y + ball.totalSize / 2)) ** 2)
+    const angle = Math.atan2(mouseY - ball.y, mouseX - ball.x) * (180 / Math.PI)
+    const velocity = Math.sqrt((mouseX - ball.x) ** 2 + (mouseY - ball.y) ** 2)
     ball.angle = angle
     ball.velocity = velocity * 0.15
   }
@@ -52,18 +52,18 @@ new Engine(60, () => {
   if (ball.velocity > 0) ball.velocity -= ball.deceleration
   if (ball.velocity < 0) ball.velocity = 0
 
-  if (ball.x + ball.totalSize >= SCREEN_WIDTH) {
-    ball.x = SCREEN_WIDTH - ball.totalSize
+  if (ball.x + ball.totalSize / 2 >= SCREEN_WIDTH) {
+    ball.x = SCREEN_WIDTH - ball.totalSize / 2
     ball.angle = 180 - ball.angle
-  } else if (ball.x <= 0) {
-    ball.x = 0
+  } else if (ball.x - ball.totalSize / 2 <= 0) {
+    ball.x = 0 + ball.totalSize / 2
     ball.angle = 180 - ball.angle
   }
-  if (ball.y + ball.totalSize >= SCREEN_HEIGHT) {
-    ball.y = SCREEN_HEIGHT - ball.totalSize
+  if (ball.y + ball.totalSize / 2 >= SCREEN_HEIGHT) {
+    ball.y = SCREEN_HEIGHT - ball.totalSize / 2
     ball.angle = 360 - ball.angle
-  } else if (ball.y <= 0) {
-    ball.y = 0
+  } else if (ball.y - ball.totalSize / 2 <= 0) {
+    ball.y = 0 + ball.totalSize / 2
     ball.angle = 360 - ball.angle
   }
 })

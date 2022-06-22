@@ -1,9 +1,9 @@
-function Golfball(initialX, initialY, size, borderSize, angle, velocity, deceleration, color) {
+function Golfball(initialX, initialY, radius, borderSize, angle, velocity, deceleration, color) {
   this.x = initialX
   this.y = initialY
-  this.size = size
+  this.radius = radius
   this.borderSize = borderSize
-  this.totalSize = (this.size + this.borderSize / 2) * 2
+  this.totalSize = this.radius * 2 + this.borderSize
   this.angle = angle
   this.velocity = velocity
   this.deceleration = deceleration

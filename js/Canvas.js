@@ -42,10 +42,10 @@ function Canvas(element, width, height) {
 
   this.golfBall = (golfball) => {
     this.context.fillStyle = golfball.color
-    this.context.strokeStyle = '#000'
+    this.context.strokeStyle = '#000000'
     this.context.lineWidth = golfball.borderSize
     this.context.beginPath()
-    this.context.arc(golfball.x + golfball.totalSize / 2, golfball.y + golfball.totalSize / 2, golfball.size, 0, Math.PI * 2)
+    this.context.arc(golfball.x, golfball.y, golfball.radius, 0, Math.PI * 2)
     this.context.stroke()
     this.context.fill()
   }
