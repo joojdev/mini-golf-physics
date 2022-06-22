@@ -41,6 +41,7 @@ function Canvas(element, width, height) {
   }
 
   this.golfBall = (golfball) => {
+    if (golfball.radius < 0) return
     this.context.fillStyle = golfball.color
     this.context.strokeStyle = '#000000'
     this.context.lineWidth = golfball.borderSize
@@ -69,6 +70,16 @@ function Canvas(element, width, height) {
     this.context.lineTo(endX - headLength * Math.cos(angle + Math.PI / 6), endY - headLength * Math.sin(angle + Math.PI / 6))
 
     this.context.stroke()
+  }
+
+  this.hole = (hole) => {
+    this.context.fillStyle = '#705441'
+    this.context.strokeStyle = '#000000'
+    this.context.lineWidth = 4
+    this.context.beginPath()
+    this.context.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2)
+    this.context.stroke()
+    this.context.fill()
   }
 }
 

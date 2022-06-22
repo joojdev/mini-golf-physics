@@ -1,3 +1,7 @@
+function random(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min)) + min
+}
+
 function Golfball(initialX, initialY, radius, borderSize, angle, velocity, deceleration, color) {
   this.x = initialX
   this.y = initialY
@@ -8,6 +12,11 @@ function Golfball(initialX, initialY, radius, borderSize, angle, velocity, decel
   this.velocity = velocity
   this.deceleration = deceleration
   this.color = color
+
+  this.randomLocation = () => {
+    this.x = random(0 + this.totalSize / 2, SCREEN_WIDTH - this.totalSize / 2)
+    this.y = random(0 + this.totalSize / 2, SCREEN_HEIGHT - this.totalSize / 2)
+  }
 }
 
 window.Golfball = Golfball
