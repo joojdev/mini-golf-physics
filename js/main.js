@@ -45,29 +45,40 @@ gameScreen.onclick = () => {
 new Engine(60, () => {
   if (!animating && ball.velocity == 0 && hole.colliding(ball)) {
     animating = true
-    ball.x = hole.x
-    ball.y = hole.y
-    points += 1
-    document.title = `${points} points - mini golf physics`
-    title.textContent = `mini golf physics - ${points} points`
-    // ball.randomLocation()
-    // hole.randomLocation(ball)
   }
   
   if (animating && !animated) {
-    if (ball.radius > 0) {
-      ball.radius -= 0.2
+    holeAngle = Math.floor(Math.atan2(hole.y - ball.y, hole.x - ball.x))
+    
+    if (Math.floor(ball.x) != Math.floor(hole.x) || Math.floor(ball.y) != Math.floor(hole.y)) {
+      ball.x += Math.cos(holeAngle) * 1.4
+      ball.y += Math.sin(holeAngle) * 1.4
     } else {
-      animated = true
-      setTimeout(() => {
-        ball.radius = GOLFBALL_RADIUS
-        
-        ball.randomLocation()
-        hole.randomLocation(ball)
-        animating = false
-        animated = false
-      }, 1000)
+      ball.x = hole.x
+      ball.y = hole.y
+      
+      if (ball.radius > 0) {
+        ball.radius -= 0.2
+      } else {
+        animated = true
+        setTimeout(() => {
+          points += 1
+          document.title = `${points} points - mini golf physics`
+          title.textContent = `mini golf physics - ${points} points`
+          
+          ball.radius = GOLFBALL_RADIUS
+          
+          ball.randomLocation()
+          hole.randomLocation(ball)
+          animating = false
+          animated = false
+          
+          mouseX = ball.x
+          mouseY = ball.y
+        }, 1000)
+      }
     }
+
   }
 
   canvas.checkerboard(7, 7, '#a2e055', '#93d640')
@@ -78,7 +89,7 @@ new Engine(60, () => {
   canvas.golfBall(ball)
 
 
-  if (mouseClicked && ball.velocity == 0) {
+  if (mouseClicked && ball.velocity == 0 && !animating) {
     mouseClicked = false
     const angle = Math.atan2(mouseY - ball.y, mouseX - ball.x) * (180 / Math.PI)
     const velocity = Math.sqrt((mouseX - ball.x) ** 2 + (mouseY - ball.y) ** 2)
