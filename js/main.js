@@ -72,7 +72,7 @@ new Engine(60, () => {
           hole.randomLocation(ball)
           animating = false
           animated = false
-          
+
           mouseX = ball.x
           mouseY = ball.y
         }, 1000)
@@ -105,7 +105,11 @@ new Engine(60, () => {
   ball.y += directionY * ball.velocity
 
   if (ball.velocity > 0) ball.velocity -= ball.deceleration
-  if (ball.velocity < 0) ball.velocity = 0
+  if (ball.velocity < 0) {
+    ball.velocity = 0
+    mouseX = ball.x
+    mouseY = ball.y
+  }
 
   if (animating) return
   if (ball.x + ball.totalSize / 2 >= SCREEN_WIDTH) {
