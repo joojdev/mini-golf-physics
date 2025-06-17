@@ -16,12 +16,60 @@ body {
   gap: 5px;
 }
 
+aside {
+  position: fixed;
+  transform: translateX(250px);
+  background: rgba(51, 51, 51, 0.3);
+  padding: 20px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#points {
+  color: rgb(186, 65, 65);
+  font-size: 3em;
+}
+
 h1 {
-  color: black;
+  color: #333;
   text-align: center;
+  animation: oscillating 3s ease-in-out infinite;
+}
+
+@keyframes oscillating {
+  0% {
+    transform: rotate(-2deg) scale(0.9);
+  }
+
+  18% {
+    transform: rotate(3deg) scale(1.2);
+  }
+
+  36% {
+    transform: rotate(-1deg) scale(0.8);
+  }
+
+  56% {
+    transform: rotate(5deg) scale(1.1);
+  }
+
+  68% {
+    transform: rotate(-3deg) scale(0.7);
+  }
+
+  87% {
+    transform: rotate(2deg) scale(1.3);
+  }
+
+  100% {
+    transform: rotate(-2deg) scale(0.9);
+  }
 }
 
 #gameScreen {
-  border: 2px solid black;
+  border: 2px solid #333;
   border-radius: 15px;
 }
